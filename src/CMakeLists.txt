@@ -185,17 +185,11 @@ configure_file(${ROOT_DIR}/include/psmove_config.h.in
 install(FILES ${CMAKE_BINARY_DIR}/psmoveapi.pc
     DESTINATION ${PSMOVEAPI_LIB_DEST}/pkgconfig)
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    # Only install the udev configuration file on Linux
-    install(FILES ${ROOT_DIR}/contrib/99-psmove.rules
-        DESTINATION /etc/udev/rules.d)
-endif()
-
-install(TARGETS ${PSMOVEAPI_INSTALL_TARGETS}
-    RUNTIME DESTINATION bin
-    LIBRARY DESTINATION ${PSMOVEAPI_LIB_DEST}
-    ARCHIVE DESTINATION ${PSMOVEAPI_LIB_DEST}
-)
+#if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+#    # Only install the udev configuration file on Linux
+#    install(FILES ${ROOT_DIR}/contrib/99-psmove.rules
+#        DESTINATION /etc/udev/rules.d)
+#endif()
 
 install(FILES ${PSMOVEAPI_HEADERS} DESTINATION include/psmoveapi)
 install(FILES README COPYING LAYOUT INSTALL DESTINATION share/psmoveapi)
@@ -211,3 +205,9 @@ include(${CMAKE_CURRENT_LIST_DIR}/tracker/CMakeLists.txt)
 #add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/utils)
 include(${CMAKE_CURRENT_LIST_DIR}/utils/CMakeLists.txt)
 include(${CMAKE_CURRENT_LIST_DIR}/unit_tests/CMakeLists.txt)
+
+install(TARGETS ${PSMOVEAPI_INSTALL_TARGETS}
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION ${PSMOVEAPI_LIB_DEST}
+    ARCHIVE DESTINATION ${PSMOVEAPI_LIB_DEST}
+)
